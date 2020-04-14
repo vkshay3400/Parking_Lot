@@ -1,7 +1,10 @@
 package com.bridgelabz.parkinglot.clientcode;
 
 public class ParkingLot {
-    public static void main(String[] args) {
-        System.out.println("Welcome message");
+    public ParkingLot() {
+    }
+
+    public boolean park(Object vehicle){
+        return true;
     }
 }
