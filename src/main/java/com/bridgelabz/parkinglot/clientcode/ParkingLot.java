@@ -9,11 +9,11 @@ public class ParkingLot {
     }
 
     // METHOD FOR PARK
-    public boolean park(Object vehicle) {
+    public boolean park(Object vehicle) throws ParkingLotException {
         if (this.vehicle != null)
-            return false;
+            throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL,"Parking is full");
         this.vehicle = vehicle;
-        return true;
+        return false;
     }
 
     // METHOD FOR UNPARK
