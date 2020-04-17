@@ -2,7 +2,7 @@ package com.bridgelabz.parkinglot.clientcode;
 
 public class ParkingLot {
     // VARIABLE
-    private Object vehicle = null;
+    private Object vehicle;
 
     // CONSTRUCTOR
     public ParkingLot() {
@@ -17,7 +17,7 @@ public class ParkingLot {
 
     // METHOD FOR UNPARKING LOT
     public void unPark(Object vehicle) throws ParkingLotException {
-        if (this.vehicle == null)
+        if (this.vehicle != null && !this.vehicle.equals(vehicle))
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_EMPTY, "Parking is empty");
         if (this.vehicle.equals(vehicle)) {
             this.vehicle = null;
