@@ -1,6 +1,6 @@
 package com.bridgelabz.parkinglot.parkingnotification;
 
-public class OwnerNotification implements ParkingLotNotification {
+public class SecurityNotification implements ParkingLotNotification {
 
     private String parkingStatus;
 
