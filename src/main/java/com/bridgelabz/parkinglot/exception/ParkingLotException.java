@@ -1,11 +1,11 @@
-package com.bridgelabz.parkinglot.clientcode;
+package com.bridgelabz.parkinglot.exception;
 
 public class ParkingLotException extends Exception {
-    private final String message;
+    public String message;
     public ExceptionType type;
 
     public enum ExceptionType {
-        PARKING_LOT_FULL, PARKING_LOT_EMPTY;
+        PARKING_LOT_FULL, NO_VEHICLE;
     }
 
     public ParkingLotException(ExceptionType type, String message) {
