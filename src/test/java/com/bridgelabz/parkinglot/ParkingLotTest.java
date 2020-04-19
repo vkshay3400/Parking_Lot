@@ -79,4 +79,14 @@ public class ParkingLotTest {
         parkingLot.park(vehicleDetails2);
         Assert.assertEquals("Parking lot is full", airportSecurity.getParkingStatus());
     }
+
+    @Test
+    public void givenAVehicle_WhenParkingLotIsFull_ShouldInformHaveSpace() throws ParkingLotException {
+        parkingLot.addObserver(owner);
+        VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
+        parkingLot.park(vehicleDetails1);
+        VehicleDetails vehicleDetails2 = new VehicleDetails("MH01AB2345", "Santro");
+        parkingLot.unPark(vehicleDetails1);
+        Assert.assertEquals("Parking lot has space",owner.getParkingStatus());
+    }
 }
