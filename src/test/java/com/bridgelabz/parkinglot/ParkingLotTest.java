@@ -10,6 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Duration;
+
 public class ParkingLotTest {
     ParkingLot parkingLot;
     private OwnerNotification owner;
@@ -99,5 +101,14 @@ public class ParkingLotTest {
         parkingLot.unPark(vehicleDetails2);
         String result = attendant.getVehiclePosition(vehicleDetails2);
         Assert.assertEquals("MH01AB2345", result);
+    }
+
+    @Test
+    public void givenAVehicle_ApplyChargesToVehicle_FromParkingLot() throws ParkingLotException {
+        attendant.addObserver(owner);
+        VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
+        attendant.park(vehicleDetails1);
+        double result = parkingLot.getChargeVehicle(vehicleDetails1);
+        Assert.assertEquals(100.0, result, 0.0);
     }
 }
