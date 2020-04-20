@@ -1,5 +1,6 @@
 package com.bridgelabz.parkinglot;
 
+import com.bridgelabz.parkinglot.clientcode.Attendant;
 import com.bridgelabz.parkinglot.clientcode.ParkingLot;
 import com.bridgelabz.parkinglot.vehicledetails.VehicleDetails;
 import com.bridgelabz.parkinglot.exception.ParkingLotException;
@@ -9,26 +10,26 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class ParkingLotTest {
-    ParkingLot parkingLot = null;
-    VehicleDetails vehicleDetails = null;
+    ParkingLot parkingLot;
     private OwnerNotification owner;
     private SecurityNotification airportSecurity;
+    Attendant attendant = new Attendant();
 
     @Before
     public void setUp() throws Exception {
         parkingLot = new ParkingLot();
         owner = new OwnerNotification();
         airportSecurity = new SecurityNotification();
-
     }
 
     @Test
     public void givenAVehicle_WhenParked_ShouldReturnTrue() {
         try {
             VehicleDetails vehicleDetails = new VehicleDetails("MH01AB1234", "WagonR");
-            parkingLot.park(vehicleDetails);
-            boolean isParked = parkingLot.isVehicleParked(vehicleDetails);
+            attendant.park(vehicleDetails);
+            boolean isParked = attendant.isVehicleParked(vehicleDetails);
             Assert.assertTrue(isParked);
         } catch (ParkingLotException e) {
             e.printStackTrace();
@@ -41,7 +42,7 @@ public class ParkingLotTest {
             VehicleDetails vehicleDetails = new VehicleDetails("MH01AB1234", "WagonR");
             parkingLot.park(vehicleDetails);
             parkingLot.unPark(vehicleDetails);
-            boolean isUnparked = parkingLot.isVehicleUnparked(vehicleDetails);
+            boolean isUnparked = attendant.isVehicleUnparked(vehicleDetails);
             Assert.assertTrue(isUnparked);
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.ExceptionType.NO_VEHICLE, e.getMessage());
@@ -52,8 +53,8 @@ public class ParkingLotTest {
     public void givenAVehicle_WhenAlreadyParked_ShouldReturnFalse() {
         try {
             VehicleDetails vehicleDetails = new VehicleDetails("MH01AB1234", "WagonR");
-            parkingLot.park(vehicleDetails);
-            boolean isParked = parkingLot.isVehicleUnparked(vehicleDetails);
+            attendant.park(vehicleDetails);
+            boolean isParked = attendant.isVehicleUnparked(vehicleDetails);
             Assert.assertFalse(isParked);
         } catch (ParkingLotException e) {
             Assert.assertEquals(ParkingLotException.ExceptionType.PARKING_LOT_FULL, e.getMessage());
@@ -86,7 +87,7 @@ public class ParkingLotTest {
         VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
         parkingLot.park(vehicleDetails1);
         VehicleDetails vehicleDetails2 = new VehicleDetails("MH01AB2345", "Santro");
-        parkingLot.unPark(vehicleDetails1);
-        Assert.assertEquals("Parking lot has space",owner.getParkingStatus());
+        parkingLot.unPark(vehicleDetails2);
+        Assert.assertEquals("Parking lot has space", owner.getParkingStatus());
     }
 }
