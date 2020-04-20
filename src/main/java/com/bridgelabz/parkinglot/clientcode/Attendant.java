@@ -7,6 +7,7 @@ import com.bridgelabz.parkinglot.parkingnotification.ParkingLotNotification;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Attendant {
 
@@ -60,5 +61,20 @@ public class Attendant {
         for (ParkingLotNotification notification : notificationList) {
             notification.update(message);
         }
+    }
+
+    // METHOD TO FIND CAR
+    public VehicleDetails searchCar() {
+        isVehicleParked(vehicleDetails);
+        return  vehicleHashMap.get(vehicleDetails.getVehicleId());
+    }
+
+    // METHOD TO GET VEHICLE POSITION
+    public String getVehiclePosition(VehicleDetails vehicleDetails) {
+        vehicleHashMap.keySet().stream()
+                .filter(key -> vehicleDetails.equals(vehicleHashMap.get(key)))
+                .map(key -> vehicleDetails.getVehicleId())
+                .collect(Collectors.toSet());
+        return vehicleDetails.getVehicleId();
     }
 }
