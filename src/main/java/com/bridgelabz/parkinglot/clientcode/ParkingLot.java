@@ -4,6 +4,9 @@ import com.bridgelabz.parkinglot.vehicledetails.VehicleDetails;
 import com.bridgelabz.parkinglot.exception.ParkingLotException;
 import com.bridgelabz.parkinglot.parkingnotification.ParkingLotNotification;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class ParkingLot {
     Attendant attendant = new Attendant();
 
@@ -20,5 +23,13 @@ public class ParkingLot {
     // METHOD TO ADD
     public void addObserver(ParkingLotNotification lotNotification) {
         attendant.addObserver(lotNotification);
+    }
+
+    // METHOD TO CHARGE A VEHICLE
+    public double getChargeVehicle(VehicleDetails vehicleDetails) {
+        attendant.getVehiclePosition(vehicleDetails);
+        Duration duration = Duration.between(Instant.now(), Instant.now().plus(Duration.ofMinutes(10)));
+        double charge = (duration.toMinutes()) * 10;
+        return charge;
     }
 }
