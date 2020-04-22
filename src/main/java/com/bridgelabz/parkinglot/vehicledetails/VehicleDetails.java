@@ -14,7 +14,7 @@ public class VehicleDetails {
         this.vehicleColor = vehicleColor;
     }
 
-    public String getPersonFitness(Enum handicap) {
+    public String getPersonFitness() {
         return personFitness;
     }
 
