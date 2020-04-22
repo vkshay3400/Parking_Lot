@@ -1,9 +1,11 @@
 package com.bridgelabz.parkinglot.clientcode;
 
+import com.bridgelabz.parkinglot.constants.Types;
 import com.bridgelabz.parkinglot.vehicledetails.VehicleDetails;
 import com.bridgelabz.parkinglot.exception.ParkingLotException;
 import com.bridgelabz.parkinglot.parkingnotification.ParkingLotNotification;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,6 +14,7 @@ public class Attendant {
     // VARIABLE
     private VehicleDetails vehicleDetails;
     public int parkingCapacity;
+    Types driverType;
     String parkingLot[] = new String[5];
 
     // MAP AND LIST
@@ -85,28 +88,33 @@ public class Attendant {
     }
 
     // TO CHECK PARKING STATUS
-    public double getParkingStatusCheck(VehicleDetails vehicleDetails) throws ParkingLotException {
+    public Serializable getParkingStatusCheck(VehicleDetails vehicleDetails) throws ParkingLotException {
         vehicleHashMap.putIfAbsent(vehicleDetails.getVehicleId(), vehicleDetails);
         Set<String> keySet = vehicleHashMap.keySet();
         ArrayList<String> arrayList = new ArrayList<String>(keySet);
         Iterator<String> lotNumber = vehicleHashMap.keySet().iterator();
         int index = 0;
         while (lotNumber.hasNext()) {
+            if (vehicleDetails.getPersonFitness().equals(driverType.HANDICAP) && (lotNumber == null)) {
+                index--;
+                index--;
+                String lot = lotNumber.next();
+                parkingLot[index] = lot;
+            }
             if (index % 2 == 0) {
-                String me = lotNumber.next();
-                parkingLot[index] = me;
                 index++;
-                index++;
+                String lot = lotNumber.next();
+                parkingLot[index] = lot;
+                break;
             }
             if (index % 2 != 0) {
-                index--;
-                index--;
-                String me = lotNumber.next();
-                parkingLot[index] = me;
+                index++;
+                String lot = lotNumber.next();
+                parkingLot[index] = lot;
+                break;
             }
             index++;
         }
-        System.out.println(Arrays.toString(parkingLot));
-        return Double.parseDouble(null);
+        return parkingLot[index];
     }
 }
