@@ -4,17 +4,19 @@ import com.bridgelabz.parkinglot.vehicledetails.VehicleDetails;
 import com.bridgelabz.parkinglot.exception.ParkingLotException;
 import com.bridgelabz.parkinglot.parkingnotification.ParkingLotNotification;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Attendant {
 
     // VARIABLE
     private VehicleDetails vehicleDetails;
+    public int parkingCapacity;
+    String parkingLot[] = new String[5];
 
-    public int parkingCapacity ;
+    // MAP AND LIST
+    HashMap<String, VehicleDetails> vehicleHashMap = new HashMap<>();
+    List<ParkingLotNotification> notificationList = new ArrayList<>();
 
     // METHOD TO GET PARKING LOT CAPACITY
     public int getParkingCapacity(int parkingCapacityValue) {
@@ -23,14 +25,10 @@ public class Attendant {
         return parkingCapacity = 2;
     }
 
-    // MAP AND LIST
-    HashMap<String, VehicleDetails> vehicleHashMap = new HashMap<>();
-    List<ParkingLotNotification> notificationList = new ArrayList<>();
-
     // METHOD FOR PARKING LOT
     public void park(VehicleDetails vehicleDetails) throws ParkingLotException {
-        if (parkingCapacity > vehicleHashMap.size())
-            vehicleHashMap.put(vehicleDetails.getVehicleId(), vehicleDetails);
+        if (this.parkingCapacity > vehicleHashMap.size())
+            getParkingStatusCheck(vehicleDetails);
         else
             throw new ParkingLotException(ParkingLotException.ExceptionType.PARKING_LOT_FULL, "Parking lot is full");
         if (parkingCapacity == vehicleHashMap.size())
@@ -64,7 +62,7 @@ public class Attendant {
         notificationList.add(lotNotification);
     }
 
-    // METHOD TO GET STATUS
+    // METHOD TO GET STATUS TO OBSERVER
     public void setParkingLotStatus(String message) {
         for (ParkingLotNotification notification : notificationList) {
             notification.update(message);
@@ -84,5 +82,31 @@ public class Attendant {
                 .map(key -> vehicleDetails.getVehicleId())
                 .collect(Collectors.toSet());
         return vehicleDetails.getVehicleId();
+    }
+
+    // TO CHECK PARKING STATUS
+    public double getParkingStatusCheck(VehicleDetails vehicleDetails) throws ParkingLotException {
+        vehicleHashMap.putIfAbsent(vehicleDetails.getVehicleId(), vehicleDetails);
+        Set<String> keySet = vehicleHashMap.keySet();
+        ArrayList<String> arrayList = new ArrayList<String>(keySet);
+        Iterator<String> lotNumber = vehicleHashMap.keySet().iterator();
+        int index = 0;
+        while (lotNumber.hasNext()) {
+            if (index % 2 == 0) {
+                String me = lotNumber.next();
+                parkingLot[index] = me;
+                index++;
+                index++;
+            }
+            if (index % 2 != 0) {
+                index--;
+                index--;
+                String me = lotNumber.next();
+                parkingLot[index] = me;
+            }
+            index++;
+        }
+        System.out.println(Arrays.toString(parkingLot));
+        return Double.parseDouble(null);
     }
 }
