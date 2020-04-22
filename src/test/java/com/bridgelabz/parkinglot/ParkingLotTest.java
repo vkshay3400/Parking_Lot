@@ -28,6 +28,7 @@ public class ParkingLotTest {
     @Test
     public void givenAVehicle_WhenParked_ShouldReturnTrue() {
         try {
+            attendant.getParkingCapacity(2);
             VehicleDetails vehicleDetails = new VehicleDetails("MH01AB1234", "WagonR");
             attendant.park(vehicleDetails);
             boolean isParked = attendant.isVehicleParked(vehicleDetails);
@@ -40,9 +41,10 @@ public class ParkingLotTest {
     @Test
     public void givenAVehicle_WhenUnParked_ShouldReturnTrue() {
         try {
+            attendant.getParkingCapacity(2);
             VehicleDetails vehicleDetails = new VehicleDetails("MH01AB1234", "WagonR");
-            parkingLot.park(vehicleDetails);
-            parkingLot.unPark(vehicleDetails);
+            attendant.park(vehicleDetails);
+            attendant.unPark(vehicleDetails);
             boolean isUnparked = attendant.isVehicleUnparked(vehicleDetails);
             Assert.assertTrue(isUnparked);
         } catch (ParkingLotException e) {
@@ -53,6 +55,7 @@ public class ParkingLotTest {
     @Test
     public void givenAVehicle_WhenAlreadyParked_ShouldReturnFalse() {
         try {
+            attendant.getParkingCapacity(2);
             VehicleDetails vehicleDetails = new VehicleDetails("MH01AB1234", "WagonR");
             attendant.park(vehicleDetails);
             boolean isParked = attendant.isVehicleUnparked(vehicleDetails);
@@ -64,6 +67,7 @@ public class ParkingLotTest {
 
     @Test
     public void givenAVehicle_WhenParkingLotIsFull_ShouldInformToOwner() throws ParkingLotException {
+        attendant.getParkingCapacity(2);
         parkingLot.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
         parkingLot.park(vehicleDetails1);
@@ -74,6 +78,7 @@ public class ParkingLotTest {
 
     @Test
     public void givenAVehicle_WhenParkingLotIsFull_ShouldInformToAirportSecurity() throws ParkingLotException {
+        attendant.getParkingCapacity(2);
         parkingLot.addObserver(airportSecurity);
         VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
         parkingLot.park(vehicleDetails1);
@@ -84,6 +89,7 @@ public class ParkingLotTest {
 
     @Test
     public void givenAVehicle_WhenParkingLotIsFull_ShouldInformHaveSpace() throws ParkingLotException {
+        attendant.getParkingCapacity(3);
         parkingLot.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
         parkingLot.park(vehicleDetails1);
@@ -94,6 +100,7 @@ public class ParkingLotTest {
 
     @Test
     public void givenAVehicle_FindMyCar_FromParkingLot() throws ParkingLotException {
+        attendant.getParkingCapacity(2);
         attendant.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
         attendant.park(vehicleDetails1);
@@ -105,6 +112,7 @@ public class ParkingLotTest {
 
     @Test
     public void givenAVehicle_ApplyChargesToVehicle_FromParkingLot() throws ParkingLotException {
+        attendant.getParkingCapacity(2);
         attendant.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("MH01AB1234", "WagonR");
         attendant.park(vehicleDetails1);

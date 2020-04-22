@@ -13,7 +13,15 @@ public class Attendant {
 
     // VARIABLE
     private VehicleDetails vehicleDetails;
-    private int parkingCapacity = 2;
+
+    public int parkingCapacity ;
+
+    // METHOD TO GET PARKING LOT CAPACITY
+    public int getParkingCapacity(int parkingCapacityValue) {
+        if (parkingCapacityValue >= 3)
+            return parkingCapacity = parkingCapacityValue;
+        return parkingCapacity = 2;
+    }
 
     // MAP AND LIST
     HashMap<String, VehicleDetails> vehicleHashMap = new HashMap<>();
@@ -66,7 +74,7 @@ public class Attendant {
     // METHOD TO FIND CAR
     public VehicleDetails searchCar() {
         isVehicleParked(vehicleDetails);
-        return  vehicleHashMap.get(vehicleDetails.getVehicleId());
+        return vehicleHashMap.get(vehicleDetails.getVehicleId());
     }
 
     // METHOD TO GET VEHICLE POSITION
