@@ -10,8 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.Duration;
-
 public class ParkingLotTest {
     ParkingLot parkingLot;
     private OwnerNotification owner;
@@ -30,10 +28,10 @@ public class ParkingLotTest {
         try {
             attendant.getParkingCapacity(2);
             VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB1234", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB1234", "WagonR", "White");
             attendant.park(vehicleDetails1);
             VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB2345", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB2345", "WagonR", "White");
             attendant.park(vehicleDetails2);
             boolean isParked = attendant.isVehicleParked(vehicleDetails1);
             Assert.assertTrue(isParked);
@@ -47,7 +45,7 @@ public class ParkingLotTest {
         try {
             attendant.getParkingCapacity(2);
             VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB1234", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB1234", "WagonR", "White");
             attendant.park(vehicleDetails1);
             attendant.unPark(vehicleDetails1);
             boolean isUnparked = attendant.isVehicleUnparked(vehicleDetails1);
@@ -62,7 +60,7 @@ public class ParkingLotTest {
         try {
             attendant.getParkingCapacity(2);
             VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB1234", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB1234", "WagonR", "White");
             attendant.park(vehicleDetails1);
             boolean isParked = attendant.isVehicleUnparked(vehicleDetails1);
             Assert.assertFalse(isParked);
@@ -76,10 +74,10 @@ public class ParkingLotTest {
         attendant.getParkingCapacity(2);
         parkingLot.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB1234", "WagonR", "White");
+                "SMALL_CAR", "MH01AB1234", "WagonR", "White");
         attendant.park(vehicleDetails1);
         VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB2345", "WagonR", "White");
+                "SMALL_CAR", "MH01AB2345", "WagonR", "White");
         attendant.park(vehicleDetails2);
         Assert.assertEquals("Parking lot is full", owner.getParkingStatus());
     }
@@ -89,10 +87,10 @@ public class ParkingLotTest {
         attendant.getParkingCapacity(2);
         parkingLot.addObserver(airportSecurity);
         VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB1234", "WagonR", "White");
+                "SMALL_CAR", "MH01AB1234", "WagonR", "White");
         attendant.park(vehicleDetails1);
         VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB2345", "WagonR", "White");
+                "SMALL_CAR", "MH01AB2345", "WagonR", "White");
         attendant.park(vehicleDetails2);
         Assert.assertEquals("Parking lot is full", airportSecurity.getParkingStatus());
     }
@@ -102,10 +100,10 @@ public class ParkingLotTest {
         attendant.getParkingCapacity(3);
         parkingLot.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB1234", "WagonR", "White");
+                "SMALL_CAR", "MH01AB1234", "WagonR", "White");
         attendant.park(vehicleDetails1);
         VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB2345", "WagonR", "White");
+                "SMALL_CAR", "MH01AB2345", "WagonR", "White");
         attendant.park(vehicleDetails2);
         Assert.assertEquals("Parking lot has space", owner.getParkingStatus());
     }
@@ -114,10 +112,10 @@ public class ParkingLotTest {
     public void givenAVehicle_FindMyCar_FromParkingLot() throws ParkingLotException {
         attendant.getParkingCapacity(2);
         VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB1234", "WagonR", "White");
+                "SMALL_CAR", "MH01AB1234", "WagonR", "White");
         attendant.park(vehicleDetails1);
         VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB2345", "WagonR", "White");
+                "SMALL_CAR", "MH01AB2345", "WagonR", "White");
         attendant.park(vehicleDetails2);
         String result = attendant.getVehiclePosition(vehicleDetails2);
         Assert.assertEquals("MH01AB2345", result);
@@ -128,7 +126,7 @@ public class ParkingLotTest {
         attendant.getParkingCapacity(2);
         attendant.addObserver(owner);
         VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                "SmallCar", "MH01AB1234", "WagonR", "White");
+                "SMALL_CAR", "MH01AB1234", "WagonR", "White");
         attendant.park(vehicleDetails1);
         double result = parkingLot.getChargeVehicle(vehicleDetails1);
         Assert.assertEquals(100.0, result, 0.0);
@@ -139,13 +137,13 @@ public class ParkingLotTest {
         try {
             attendant.getParkingCapacity(5);
             VehicleDetails vehicleDetails1 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB1234", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB1234", "WagonR", "White");
             attendant.park(vehicleDetails1);
             VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB2345", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB2345", "WagonR", "White");
             attendant.park(vehicleDetails2);
             VehicleDetails vehicleDetails4 = new VehicleDetails("HANDICAP",
-                    "SmallCar", "MH01AB35456", "WagonR", "White");
+                    "SMALL_CAR", "MH01AB35456", "WagonR", "White");
             attendant.park(vehicleDetails4);
             boolean isParked = attendant.isVehicleParked(vehicleDetails2);
             Assert.assertTrue(isParked);
@@ -154,4 +152,23 @@ public class ParkingLotTest {
         }
     }
 
+    @Test
+    public void givenAVehicle_WhenHandicapParkNear_ShouldReturnTrue() {
+        try {
+            attendant.getParkingCapacity(5);
+            VehicleDetails vehicleDetails1 = new VehicleDetails("NORMAL",
+                    "SMALL_CAR", "MH01AB1234", "WagonR", "White");
+            attendant.park(vehicleDetails1);
+            VehicleDetails vehicleDetails2 = new VehicleDetails("HANDICAP",
+                    "SMALL_CAR", "MH01AB2345", "WagonR", "White");
+            attendant.park(vehicleDetails2);
+            VehicleDetails vehicleDetails4 = new VehicleDetails("NORMAL",
+                    "SMALL_CAR", "MH01AB3456", "WagonR", "White");
+            attendant.park(vehicleDetails4);
+            boolean isParked = attendant.isVehicleParked(vehicleDetails1);
+            Assert.assertTrue(isParked);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+    }
 }
